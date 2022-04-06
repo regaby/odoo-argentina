@@ -12,6 +12,7 @@ import sys
 import traceback
 from datetime import datetime, date
 _logger = logging.getLogger(__name__)
+import json
 
 try:
     from pysimplesoap.client import SoapFault
@@ -532,7 +533,7 @@ print "Observaciones:", wscdc.Obs
             for move_tax in inv.move_tax_ids:
                 amount_total += move_tax.tax_amount
 
-            imp_total = str("%.2f" % amount_total)
+            imp_total = str("%.2f" % json.loads(inv.tax_totals_json)['amount_total'])
             # ImpTotConc es el iva no gravado
             imp_tot_conc = str("%.2f" % inv.vat_untaxed_base_amount)
             # imp_tot_conc = str("%.2f" % inv.amount_untaxed)
