@@ -1,6 +1,6 @@
 {
     "name": "Factura Electrónica Argentina",
-    'version': '12.0.1.3.0',
+    'version': '17.0.1.3.0',
     'category': 'Localization/Argentina',
     'sequence': 14,
     'author': 'ADHOC SA, Moldeo Interactive,Odoo Community Association (OCA)',

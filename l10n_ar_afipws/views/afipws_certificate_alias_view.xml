@@ -9,25 +9,25 @@
                 <header>
                     <button name="action_confirm"
                         type="object"
-                        states="draft"
+                        invisible="state != 'draft'"
                         string="Confirm"
                         class="oe_highlight"
                         help="Confirm and generate Key"
                         />
                     <button name="action_create_certificate_request"
                         type="object"
-                        states="confirmed"
+                        invisible="state != 'confirmed'"
                         class="oe_highlight"
                         string="Create Certificate Request"
                         />
                     <button name="action_cancel"
                         type="object"
-                        states="draft,confirmed"
+                        invisible="state not in ('draft','confirmed')"
                         string="Cancel"
                         />
                     <button name="action_to_draft"
                         type="object"
-                        states="cancel"
+                        invisible="state != 'cancel'"
                         string="To Draft"
                         />
                     <field name="state" widget="statusbar"/>
@@ -36,16 +36,22 @@
                     <group>
                         <group>
                             <field name="company_id" groups="base.group_multi_company"/>
-                            <field name="type"/>
-                            <field name="service_type" groups="base.group_no_one"/>
-                            <field name="service_provider_cuit" attrs="{'invisible':[('service_type','!=','outsourced')],'required':[('service_type','=','outsourced')]}"/>
-                            <field name="company_cuit" attrs="{'invisible':[('service_type','!=','in_house')],'required':[('service_type','=','in_house')]}"/>
+                            <field name="type" readonly="state != 'draft'"/>
+                            <field name="service_type" readonly="state != 'draft'" />
+                            <field name="service_provider_cuit" 
+                                readonly="state != 'draft'" 
+                                invisible="service_type != 'outsourced'" 
+                                required="service_type == 'outsourced'"/>
+                            <field name="company_cuit" 
+                                readonly="state != 'draft'"
+                                invisible="service_type != 'in_house'" 
+                                required="service_type == 'in_house'"/>
                         </group>
                         <group>
-                            <field name="common_name"/>
-                            <field name="country_id"/>
-                            <field name="state_id"/>
-                            <field name="city"/>
+                            <field name="common_name" readonly="state != 'draft'"/>
+                            <field name="country_id" readonly="state != 'draft'"/>
+                            <field name="state_id" readonly="state != 'draft'"/>
+                            <field name="city" readonly="state != 'draft'"/>
                         </group>
                     </group>
                     <notebook>
@@ -53,7 +59,7 @@
                             <field name="certificate_ids"/>
                         </page>
                         <page string="Key" groups="base.group_no_one">
-                            <field name="key"/>
+                            <field name="key" readonly="state != 'draft'" />
                         </page>
                     </notebook  >
                 </sheet>

@@ -1,6 +1,6 @@
 {
     "name": "account_move_tax",
-    'version': '12.0.1.3.0',
+    'version': '17.0.1.3.0',
     'category': 'Localization/Argentina',
     'sequence': 14,
     'author': 'ADHOC SA, Moldeo Interactive,Odoo Community Association (OCA)',
@@ -17,6 +17,7 @@
     },
     'data': [
         'views/move_view.xml',
+        'views/tax_group_view.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [
