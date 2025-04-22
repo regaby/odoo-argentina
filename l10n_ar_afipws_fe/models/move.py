@@ -498,6 +498,7 @@ print "Observaciones:", wscdc.Obs
             #            inv.invoice_number)))
 
             partner_id_code = commercial_partner.l10n_latam_identification_type_id.l10n_ar_afip_code
+            condicion_iva_receptor_id = commercial_partner.l10n_ar_afip_responsibility_type_id.code
             tipo_doc = partner_id_code or '99'
             nro_doc = \
                 partner_id_code and commercial_partner.vat or "0"
@@ -569,7 +570,8 @@ print "Observaciones:", wscdc.Obs
                     imp_iva,
                     imp_trib, imp_op_ex, fecha_cbte, fecha_venc_pago,
                     fecha_serv_desde, fecha_serv_hasta,
-                    moneda_id, round(moneda_ctz,2)
+                    moneda_id, round(moneda_ctz,2),
+                    cancela_misma_moneda_ext='N', condicion_iva_receptor_id=condicion_iva_receptor_id
                 )
                 if inv.other_taxes_amount > 0:
                     for move_tax in inv.move_tax_ids:
